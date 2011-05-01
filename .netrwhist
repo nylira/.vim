@@ -1,11 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/ari/.vim/bundle'
-let g:netrw_dirhist_2='/home/ari/.vim/bundle/vim-jade'
-let g:netrw_dirhist_3='/home/ari/.vim/bundle/vim-jade/ftplugin'
-let g:netrw_dirhist_4='/home/ari'
-let g:netrw_dirhist_5='/home/ari/projects/express_intro'
-let g:netrw_dirhist_6='/home/ari/projects/nodepad'
-let g:netrw_dirhist_7='/home/ari/projects/rails_refresher'
-let g:netrw_dirhist_8='/home/ari'
-let g:netrw_dirhist_9='/home/ari/.vim/ruby/command-t'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/home/ari/.vim/bundle/vim-haml'
+let g:netrw_dirhist_2='/home/ari/.vim/bundle/command-t/ruby/command-t'

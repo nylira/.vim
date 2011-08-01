@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/ari/.vim/bundle/vim-haml'
-let g:netrw_dirhist_2='/home/ari/.vim/bundle/command-t/ruby/command-t'
-let g:netrw_dirhist_3='/home/ari'
-let g:netrw_dirhist_4='/home/ari/.vim/bundle'
-let g:netrw_dirhist_5='/home/ari/.vim'
-let g:netrw_dirhist_6='/home/ari'
-let g:netrw_dirhist_7='/Users/ari/Dropbox/clients/hotzing/HotZing/public/layout_changes'
-let g:netrw_dirhist_8='/Users/ari/Dropbox/clients/dulst'
-let g:netrw_dirhist_9='/Users/ari/.vim'
+let g:netrw_dirhist_cnt =0

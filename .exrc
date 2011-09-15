@@ -11,6 +11,8 @@ set hidden
 "
 " Set leader key
 let mapleader = ","
+" jj for escape
+:imap jj <Esc>
 "
 set exrc
 set nu

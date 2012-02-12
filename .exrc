@@ -11,8 +11,6 @@ set hidden
 "
 " Set leader key
 let mapleader = ","
-" jj for escape
-:imap jj <Esc>
 "
 set exrc
 set nu
@@ -53,17 +51,9 @@ set linebreak
 set display+=lastline
 "
 " syntax colors with solarized
-syntax on
+syntax enable
 set background=dark
 colorscheme solarized
-"
-" python
-autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-"
-" lisp
-set directory=/tmp
-set lisp
-set cpoptions-=m
 "
 " file navigation
 nnoremap <F2> :NERDTreeToggle<cr>
@@ -76,4 +66,14 @@ set pastetoggle=<F3>
 "
 " clear highlighted searches without 'sdoifnsd'
 nmap <silent> ,/ :nohlsearch<CR>
-"
+
+" tell vim to keep a backup file
+set backup
+
+" tell vim where to put its backup files
+set backupdir=/home/ari/tmp
+
+" tell vim where to put swap files
+set dir=/home/ari/tmp
+" more syntax highlighting
+au BufReadPost *.styl set syntax=stylus

@@ -67,13 +67,5 @@ set pastetoggle=<F3>
 " clear highlighted searches without 'sdoifnsd'
 nmap <silent> ,/ :nohlsearch<CR>
 
-" tell vim to keep a backup file
-set backup
-
-" tell vim where to put its backup files
-set backupdir=/home/ari/tmp
-
-" tell vim where to put swap files
-set dir=/home/ari/tmp
 " more syntax highlighting
 au BufReadPost *.styl set syntax=stylus

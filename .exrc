@@ -1,70 +1,41 @@
-" This must be first, because it changes other options as side effect
 set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+Bundle 'kien/ctrlp.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'wavded/vim-stylus'
+Bundle 'scrooloose/nerdtree'
+Bundle 'altercation/vim-colors-solarized'
+ 
+filetype plugin indent on     " required!
 "
-" Use pathogen to easily modify the runtime path to include all
-" plugins under the ~/.vim/bundle directory
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 "
-" Hide buffers instead of closing them
-set hidden
-"
-" Set leader key
-let mapleader = ","
-"
-set exrc
-set nu
-set fileencodings=utf-8
-set scrolloff=999
-set history=1000         " remember more commands and search history
-set undolevels=1000      " use many muchos levels of undo
-set wildignore=*.swp,*.bak,*.pyc,*.class
-set title                " change the terminal's title
-set visualbell           " don't beep
-set noerrorbells         " don't beep
-"
-" tab settings
-"
-set tabstop=2     " a tab is two spaces
-set backspace=indent,eol,start
-                  " allow backspacing over everything in insert mode
-set autoindent    " always set autoindenting on
-set copyindent    " copy the previous indentation on autoindenting
-set number        " always show line numbers
-set shiftwidth=2  " number of spaces to use for autoindenting
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
-set showmatch     " set show matching parenthesis
-set ignorecase    " ignore case when searching
-set smartcase     " ignore case if search pattern is all lowercase,
-                  "    case-sensitive otherwise
-set smarttab      " insert tabs on the start of a line according to
-                  "    shiftwidth, not tabstop
-set hlsearch      " highlight search terms
-set incsearch     " show search matches as you type
-set softtabstop=2
-set expandtab
-set cindent
-set cinkeys=0{,0},:,!^F
-"
-" Break lines intelligently when wrapping
-set linebreak
-set display+=lastline
-"
-" syntax colors with solarized
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+
+" solarized
 syntax enable
 set background=dark
 colorscheme solarized
-"
-" file navigation
+ 
+" remap
 nnoremap <F2> :NERDTreeToggle<cr>
-nnoremap <F1> :CommandT<cr>
-" semicolon instead of colon for most commands
+nnoremap <F1> :CtrlP<cr>
 nnoremap ; :
-"
-" turn off autoindent and crap for pasting
 set pastetoggle=<F3>
-"
-" clear highlighted searches without 'sdoifnsd'
+ 
+" reset search
 nmap <silent> ,/ :nohlsearch<CR>
 
 " more syntax highlighting

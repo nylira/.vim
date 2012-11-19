@@ -5,14 +5,18 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'scrooloose/nerdtree'
+Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'mileszs/surround.vim'
+Bundle 'fholgado/minibufexpl.vim'
 Bundle 'altercation/vim-colors-solarized'
  
 filetype plugin indent on     " required!
 
 set exrc
 set nu
+set hidden
 set fileencodings=utf-8
 set scrolloff=999
 set history=1000         " remember more commands and search history
@@ -31,10 +35,21 @@ set background=dark
 colorscheme solarized
  
 " remap
-nnoremap <F1> :Explore<cr>
+nnoremap <F1> :CtrlP<cr>
 nnoremap <F2> :NERDTreeToggle<cr>
 nnoremap ; :
-set pastetoggle=<F3>
+nnoremap gt :bn<cr>
  
+set pastetoggle=<F3>
+
 " reset search
 nmap <silent> ,/ :nohlsearch<CR>
+
+" make nerdtree open the old buffer instead of making new ones
+ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif   
+
+" make ctrl-p open in new tabs by default
+" let g:ctrlp_prompt_mappings = {
+"     \ 'AcceptSelection("e")': ['<c-t>'],
+"     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+"     \ }

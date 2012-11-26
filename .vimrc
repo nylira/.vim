@@ -7,9 +7,10 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
+Bundle 'othree/html5.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'mileszs/surround.vim'
-Bundle 'fholgado/minibufexpl.vim'
+"Bundle 'fholgado/minibufexpl.vim'
 Bundle 'altercation/vim-colors-solarized'
  
 filetype plugin indent on     " required!
@@ -26,8 +27,9 @@ set noerrorbells         " don't beep
 
 " tabs set to 2 spaces
 set expandtab
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 
 " solarized
 syntax enable
@@ -48,8 +50,4 @@ nmap <silent> ,/ :nohlsearch<CR>
 " make nerdtree open the old buffer instead of making new ones
  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif   
 
-" make ctrl-p open in new tabs by default
-" let g:ctrlp_prompt_mappings = {
-"     \ 'AcceptSelection("e")': ['<c-t>'],
-"     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-"     \ }
+set hlsearch

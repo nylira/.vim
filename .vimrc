@@ -11,7 +11,6 @@ Bundle 'mileszs/ack.vim'
 Bundle 'othree/html5.vim'
 Bundle 'wavded/vim-stylus'
 Bundle 'scrooloose/nerdtree'
-Bundle 'mileszs/surround.vim'
 Bundle 'altercation/vim-colors-solarized'
  
 filetype plugin indent on     " required!

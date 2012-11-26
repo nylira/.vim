@@ -5,12 +5,13 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+Bundle 'zefei/buftabs'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'othree/html5.vim'
+Bundle 'wavded/vim-stylus'
 Bundle 'scrooloose/nerdtree'
 Bundle 'mileszs/surround.vim'
-"Bundle 'fholgado/minibufexpl.vim'
 Bundle 'altercation/vim-colors-solarized'
  
 filetype plugin indent on     " required!

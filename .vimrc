@@ -1,5 +1,6 @@
 set nocompatible
 filetype off
+set noswapfile
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -11,12 +12,12 @@ Bundle 'mileszs/ack.vim'
 Bundle 'othree/html5.vim'
 Bundle 'wavded/vim-stylus'
 Bundle 'scrooloose/nerdtree'
+Bundle 'kchmck/vim-coffee-script'
 Bundle 'altercation/vim-colors-solarized'
  
 filetype plugin indent on     " required!
 
 set exrc
-set nu
 set hidden
 set fileencodings=utf-8
 set scrolloff=999

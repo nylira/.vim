@@ -5,13 +5,16 @@ set noswapfile
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+Bundle 'gkz/vim-ls'
 Bundle 'gmarik/vundle'
 Bundle 'zefei/buftabs'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'othree/html5.vim'
 Bundle 'wavded/vim-stylus'
+Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdtree'
+Bundle 'unc0/vim-gorilla-script'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'altercation/vim-colors-solarized'
  

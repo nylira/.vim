@@ -5,18 +5,20 @@ set noswapfile
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gkz/vim-ls'
 Bundle 'gmarik/vundle'
 Bundle 'zefei/buftabs'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'othree/html5.vim'
-Bundle 'wavded/vim-stylus'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdtree'
-Bundle 'unc0/vim-gorilla-script'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'altercation/vim-colors-solarized'
+
+Bundle 'wavded/vim-stylus'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'nono/vim-handlebars.git'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'gkz/vim-ls'
  
 filetype plugin indent on     " required!
 
@@ -28,6 +30,7 @@ set history=1000         " remember more commands and search history
 set undolevels=1000      
 set visualbell           " don't beep
 set noerrorbells         " don't beep
+set nu
 
 " tabs set to 2 spaces
 set expandtab

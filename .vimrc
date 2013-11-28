@@ -13,9 +13,11 @@ Bundle 'othree/html5.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdtree'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'Raimondi/delimitMate'
 
 Bundle 'wavded/vim-stylus'
 Bundle 'digitaltoad/vim-jade'
+Bundle 'slim-template/vim-slim'
 Bundle 'nono/vim-handlebars.git'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'gkz/vim-ls'
@@ -58,3 +60,21 @@ nmap <silent> ,/ :nohlsearch<CR>
  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif   
 
 set hlsearch
+
+" skip over parens with tab key
+inoremap <expr> <Tab> SkipClosingParentheses()
+ 
+function! SkipClosingParentheses()
+  let line = getline('.')
+  let current_char = line[col('.')-1]
+ 
+  "Ignore EOL
+  if col('.') == col('$')
+    return "\t"
+  end
+ 
+  return stridx(']})', current_char)==-1 ? "\t" : "\<Right>"
+endfunction
+
+"use tab instead of spaces for makefiles"
+autocmd FileType make setlocal noexpandtab

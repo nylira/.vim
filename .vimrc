@@ -5,22 +5,24 @@ set noswapfile
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/vundle'
-Bundle 'zefei/buftabs'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'othree/html5.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'scrooloose/nerdtree'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'Raimondi/delimitMate'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-surround'
+Bundle 'zefei/buftabs'
 
-Bundle 'wavded/vim-stylus'
+" syntax highlighting and support
 Bundle 'digitaltoad/vim-jade'
-Bundle 'slim-template/vim-slim'
-Bundle 'nono/vim-handlebars.git'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'gkz/vim-ls'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'nono/vim-handlebars.git'
+Bundle "pangloss/vim-javascript"
+Bundle 'slim-template/vim-slim'
+Bundle 'wavded/vim-stylus'
  
 filetype plugin indent on     " required!
 

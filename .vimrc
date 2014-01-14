@@ -41,8 +41,9 @@ set shiftwidth=2
 set softtabstop=2
 
 " solarized
-syntax enable
+syntax on
 set background=dark
+set t_Co=16
 colorscheme solarized
  
 " remap

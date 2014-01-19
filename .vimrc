@@ -6,22 +6,21 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'ervandew/supertab'
 Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'othree/html5.vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdtree'
+Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-surround'
 Bundle 'zefei/buftabs'
 
 " syntax highlighting and support
 Bundle 'digitaltoad/vim-jade'
+Bundle 'elzr/vim-json'
 Bundle 'gkz/vim-ls'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'nono/vim-handlebars.git'
+Bundle 'othree/html5.vim'
 Bundle "pangloss/vim-javascript"
-Bundle 'slim-template/vim-slim'
 Bundle 'wavded/vim-stylus'
  
 filetype plugin indent on     " required!
@@ -53,6 +52,7 @@ nnoremap <F1> :CtrlP<cr>
 nnoremap <F2> :NERDTreeToggle<cr>
 nnoremap ; :
 nnoremap gt :bn<cr>
+nnoremap Gt :bp<cr>
  
 set pastetoggle=<F3>
 
@@ -81,3 +81,12 @@ endfunction
 
 "use tab instead of spaces for makefiles"
 autocmd FileType make setlocal noexpandtab
+
+" paste and keep
+vnoremap p "_dP"
+
+" change bg color for going past 80 characters
+"set cc=80
+
+" livescript autocompile
+au BufWritePost *.ls silent LiveScriptMake! | cwindow | redraw!

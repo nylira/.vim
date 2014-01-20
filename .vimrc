@@ -1,8 +1,8 @@
 if has('vim_starting')
- set nocompatible               " Be iMproved
+  set nocompatible               " Be iMproved
 
- " Required:
- set runtimepath+=~/.vim/bundle/neobundle.vim/
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 " Required:
@@ -12,12 +12,11 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'gmarik/vundle'
-NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'zefei/buftabs'
 
 " syntax highlighting and support
@@ -60,7 +59,7 @@ set t_Co=16
 colorscheme solarized
  
 " remap
-nnoremap <F1> :CtrlP<cr>
+nnoremap <F1> :Unite buffer file_rec<cr>
 nnoremap <F2> :NERDTreeToggle<cr>
 nnoremap ; :
 nnoremap gt :bn<cr>

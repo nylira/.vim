@@ -2,6 +2,7 @@ buftabs
 delimitMate
 html5.vim
 neobundle.vim
+neocomplete.vim
 nerdtree
 unite.vim
 vim-colors-solarized

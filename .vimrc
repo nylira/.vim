@@ -21,6 +21,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'zefei/buftabs'
 
 " syntax highlighting and support

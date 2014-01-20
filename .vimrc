@@ -1,3 +1,7 @@
+"----------------------------------------------------------------------
+" Bundle Management: NeoBundle
+"----------------------------------------------------------------------
+
 if has('vim_starting')
   set nocompatible               " Be iMproved
 
@@ -26,78 +30,66 @@ NeoBundle 'gkz/vim-ls'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'wavded/vim-stylus'
- 
-filetype off
-set noswapfile
-filetype plugin indent on     " required!
 
+filetype plugin indent on     " required!
+ 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 
+"----------------------------------------------------------------------
+" Settings: Main
+"----------------------------------------------------------------------
+
 set exrc
-set hidden
+set hidden                " allow buffers to be switched w/o saving
 set fileencodings=utf-8
 set scrolloff=999
-set history=1000         " remember more commands and search history
-set undolevels=1000      
-set visualbell           " don't beep
-set noerrorbells         " don't beep
-set nu
+set history=1000          " remember more commands and search history
+set undolevels=1000       " undo all the things
+set visualbell            " don't beep
+set noerrorbells          " don't beep
+set nu                    " use line numbers
+set hlsearch              " highlight text matching pattern
+set noswapfile            " don't use swapfiles
 
-" tabs
+" Indentation
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-" ^ makes tabs into spaces
 
-" solarized
+set backspace=indent,eol,start    " fix backspace
+
+"----------------------------------------------------------------------
+" Color Scheme: Solarized
+"----------------------------------------------------------------------
+
 syntax on
 set background=dark
 set t_Co=16
 colorscheme solarized
  
-" remap
+"----------------------------------------------------------------------
+" Key Bindings: General
+"----------------------------------------------------------------------
 nnoremap <F1> :Unite buffer file_rec<cr>
 nnoremap <F2> :NERDTreeToggle<cr>
 nnoremap ; :
 nnoremap gt :bn<cr>
 nnoremap Gt :bp<cr>
- 
 set pastetoggle=<F3>
+nmap <silent> ,/ :nohlsearch<CR>    " clear highlighted text
 
-" reset search
-nmap <silent> ,/ :nohlsearch<CR>
+"----------------------------------------------------------------------
+" Settings: Miscellaneous
+"----------------------------------------------------------------------
 
 " make nerdtree open the old buffer instead of making new ones
  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif   
 
-set hlsearch
-
-" skip over parens with tab key
-inoremap <expr> <Tab> SkipClosingParentheses()
- 
-function! SkipClosingParentheses()
-  let line = getline('.')
-  let current_char = line[col('.')-1]
- 
-  "Ignore EOL
-  if col('.') == col('$')
-    return "\t"
-  end
- 
-  return stridx(']})', current_char)==-1 ? "\t" : "\<Right>"
-endfunction
-
-"use tab instead of spaces for makefiles"
+" Makefile - tab instead of space"
 autocmd FileType make setlocal noexpandtab
-
-" paste and keep
-vnoremap p "_dP"
-
-" change bg color for going past 80 characters
-"set cc=80
 
 " livescript autocompile
 au BufWritePost *.ls silent LiveScriptMake! -d | cwindow | redraw!

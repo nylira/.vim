@@ -1,29 +1,40 @@
-set nocompatible
-filetype off
-set noswapfile
+if has('vim_starting')
+ set nocompatible               " Be iMproved
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+ " Required:
+ set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'ervandew/supertab'
-Bundle 'gmarik/vundle'
-Bundle 'kien/ctrlp.vim'
-Bundle 'Raimondi/delimitMate'
-Bundle 'scrooloose/nerdtree'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'tpope/vim-surround'
-Bundle 'zefei/buftabs'
+" Required:
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Required: Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'gmarik/vundle'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'zefei/buftabs'
 
 " syntax highlighting and support
-Bundle 'digitaltoad/vim-jade'
-Bundle 'elzr/vim-json'
-Bundle 'gkz/vim-ls'
-Bundle 'othree/html5.vim'
-Bundle "pangloss/vim-javascript"
-Bundle 'wavded/vim-stylus'
+NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'elzr/vim-json'
+NeoBundle 'gkz/vim-ls'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'wavded/vim-stylus'
  
+filetype off
+set noswapfile
 filetype plugin indent on     " required!
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
 
 set exrc
 set hidden
@@ -35,11 +46,12 @@ set visualbell           " don't beep
 set noerrorbells         " don't beep
 set nu
 
-" tabs set to 2 spaces
-set expandtab
+" tabs
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+set expandtab
+" ^ makes tabs into spaces
 
 " solarized
 syntax on
@@ -89,4 +101,13 @@ vnoremap p "_dP"
 "set cc=80
 
 " livescript autocompile
-au BufWritePost *.ls silent LiveScriptMake! | cwindow | redraw!
+au BufWritePost *.ls silent LiveScriptMake! -d | cwindow | redraw!
+
+" make long lines slightly indented
+let &showbreak=repeat(' ', 2)
+
+" auto reload .vimrc
+augroup myvimrchooks
+  au!
+  autocmd bufwritepost .vimrc source ~/.vimrc
+augroup END

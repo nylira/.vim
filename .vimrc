@@ -96,7 +96,7 @@ nnoremap ; :
 
 inoremap jk <esc>       " jk is escape
 
-set pastetoggle=<F3>
+set pastetoggle=<F4>
 
 " edit splits easier
 map <C-\> :vsplit<cr>

@@ -41,18 +41,6 @@ set history=1000                " remember more
 set undolevels=1000             " undo all the things
 set visualbell                  " don't beep
 set noerrorbells                " don't beep
-set nu                          " use line numbers
-set hlsearch                    " highlight text matching pattern
-set noswapfile                  " don't use swapfiles
-
-"----------------------------------------------------------------------
-" Settings: Spaces & Tabs
-"----------------------------------------------------------------------
-
-set tabstop=2                   " number of visual spaces per tab
-set shiftwidth=2
-set softtabstop=2
-set expandtab
 
 set backspace=indent,eol,start  " fix backspace
 
@@ -65,14 +53,43 @@ augroup myvimrchooks
 augroup END
 
 "----------------------------------------------------------------------
-" Color Scheme: Solarized
+" Settings: Spaces & Tabs
 "----------------------------------------------------------------------
 
-syntax on
-set background=dark
-set t_Co=16
-colorscheme solarized
- 
+set tabstop=2            " number of visual spaces per tab
+set softtabstop=2        " number of spaces in tab when editing
+set expandtab            " tabs are spaces
+
+"----------------------------------------------------------------------
+" Settings: UI Config
+"----------------------------------------------------------------------
+
+set number              " show line numbers
+set showcmd             " show command in bottom bar
+set cursorline          " highlight current line
+filetype indent on      " load filetype-specific indent files
+set wildmenu            " visual autocomplete for command menu
+set lazyredraw          " redraw only when we need to (speed boost)
+set showmatch           " highlight matching [{()}]
+
+"----------------------------------------------------------------------
+" Settings: Searching
+"----------------------------------------------------------------------
+
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
+nmap <silent> ,/ :nohlsearch<CR>    " clear highlighted text
+
+"----------------------------------------------------------------------
+" Settings: Folding
+"----------------------------------------------------------------------
+
+set foldenable          " enable folding
+set foldlevelstart=10   " open most folds by default
+set foldnestmax=10      " 10 nested fold max
+nnoremap <space> za     " space key open & closes folds
+set foldmethod=indent   " fold based on indent level
+
 "----------------------------------------------------------------------
 " Key Bindings: General
 "----------------------------------------------------------------------
@@ -82,7 +99,6 @@ imap jk <Esc>
 nnoremap gt :bn<cr>
 nnoremap Gt :bp<cr>
 set pastetoggle=<F3>
-nmap <silent> ,/ :nohlsearch<CR>    " clear highlighted text
 
 " edit splits easier
 map <C-\> :vsplit<cr>
@@ -95,6 +111,15 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 "----------------------------------------------------------------------
+" Color Scheme: Solarized
+"----------------------------------------------------------------------
+
+syntax on
+set background=dark
+set t_Co=16
+colorscheme solarized
+
+"----------------------------------------------------------------------
 " Settings: File Types
 "----------------------------------------------------------------------
 
@@ -105,13 +130,20 @@ autocmd FileType make setlocal noexpandtab
 au BufWritePost *.ls silent LiveScriptMake! -d | cwindow | redraw!
 
 "----------------------------------------------------------------------
+" Settings: Backup
+"----------------------------------------------------------------------
+
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
+
+"----------------------------------------------------------------------
 " Settings: NERDTree
 "----------------------------------------------------------------------
 
 nnoremap <F2> :NERDTreeToggle<CR>
-
-" open at startup
-" autocmd vimenter * if !argc() | NERDTree | endif
 
 " open the old buffer instead a new one
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif   
@@ -123,22 +155,10 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 let g:ctrlp_map = '<F1>'
 let g:ctrlp_cmd = 'CtrlP'
 
-"----------------------------------------------------------------------
-" Settings: Shougo/vimfiler
-"----------------------------------------------------------------------
-
-"nnoremap <F2> :VimFiler -buffer-name=explorer -split -simple -winwidth=31 -toggle -no-quit<CR>
-
-"let g:vimfiler_as_default_explorer = 1
-"let g:vimfiler_safe_mode_by_default = 0
-
-"----------------------------------------------------------------------
-" Settings: Shougo/unite.vim
-"----------------------------------------------------------------------
-
-"let g:unite_source_history_yank_enable = 1
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"nnoremap <F1> :<C-u>Unite -toggle -start-insert file_rec/async<CR>
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_custom_ignore = '\vbuild/|dist/|venv/|\.(o|swp|pyc|egg)$'
 
 "----------------------------------------------------------------------
 " Settings: Shougo/neocomplete

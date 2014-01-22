@@ -2,7 +2,6 @@
 " Bundle Management: Vundle
 "----------------------------------------------------------------------
 
-set nocompatible              " be iMproved
 filetype off                  " required!
 
 set rtp+=~/.vim/bundle/vundle/
@@ -67,7 +66,6 @@ set expandtab            " tabs are spaces
 set number              " show line numbers
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
-filetype indent on      " load filetype-specific indent files
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to (speed boost)
 set showmatch           " highlight matching [{()}]
@@ -91,13 +89,13 @@ nnoremap <space> za     " space key open & closes folds
 set foldmethod=indent   " fold based on indent level
 
 "----------------------------------------------------------------------
-" Key Bindings: General
+" Settings: Bindings
 "----------------------------------------------------------------------
 
 nnoremap ; :
-imap jk <Esc>
-nnoremap gt :bn<cr>
-nnoremap Gt :bp<cr>
+
+inoremap jk <esc>       " jk is escape
+
 set pastetoggle=<F3>
 
 " edit splits easier
@@ -110,13 +108,20 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+map :rv :source ~/.vimrc<CR>
+
+"----------------------------------------------------------------------
+" Settings: Buffers
+"----------------------------------------------------------------------
+
+map gt :bprev<Return>
+map gT :bnext<Return>
+
 "----------------------------------------------------------------------
 " Color Scheme: Solarized
 "----------------------------------------------------------------------
 
 syntax on
-set background=dark
-set t_Co=16
 colorscheme solarized
 
 "----------------------------------------------------------------------
@@ -149,11 +154,12 @@ nnoremap <F2> :NERDTreeToggle<CR>
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif   
 
 "----------------------------------------------------------------------
-" Settings: CtrlP
+" Settings: CtrlP (ctrlp)
 "----------------------------------------------------------------------
 
 let g:ctrlp_map = '<F1>'
 let g:ctrlp_cmd = 'CtrlP'
+nnoremap <F3> :CtrlPBuffer<CR>
 
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
@@ -164,7 +170,6 @@ let g:ctrlp_custom_ignore = '\vbuild/|dist/|venv/|\.(o|swp|pyc|egg)$'
 " Settings: Shougo/neocomplete
 "----------------------------------------------------------------------
 
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -174,13 +179,6 @@ let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
@@ -210,24 +208,8 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
 " AutoComplPop like behavior.
 "let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -240,10 +222,12 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+"----------------------------------------------------------------------
+" Settings: Bindings!
+"----------------------------------------------------------------------
+
+noremap  <buffer> <silent> k gk
+noremap  <buffer> <silent> j gj
+noremap  <buffer> <silent> 0 g0
+noremap  <buffer> <silent> $ g$

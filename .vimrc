@@ -11,12 +11,17 @@ call vundle#rc()
 " required! 
 Bundle 'gmarik/vundle'
 
-" general 
+" plugins 
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'kana/vim-arpeggio'
 Bundle 'kien/ctrlp.vim'
+Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
 Bundle 'Shougo/neocomplete.vim'
 Bundle 'zefei/buftabs'
+Bundle 'tpope/vim-dispatch'
+Bundle 'tpope/vim-surround'
 
 " syntax highlighting and support
 Bundle 'digitaltoad/vim-jade'
@@ -29,7 +34,7 @@ Bundle 'wavded/vim-stylus'
 filetype plugin indent on     " required!
  
 "----------------------------------------------------------------------
-" Settings: Main
+" Settings: General
 "----------------------------------------------------------------------
 
 set exrc
@@ -57,6 +62,7 @@ augroup END
 
 set tabstop=2            " number of visual spaces per tab
 set softtabstop=2        " number of spaces in tab when editing
+set shiftwidth=2
 set expandtab            " tabs are spaces
 
 "----------------------------------------------------------------------
@@ -64,8 +70,10 @@ set expandtab            " tabs are spaces
 "----------------------------------------------------------------------
 
 set number              " show line numbers
+set relativenumber      " show relative numbers in insert
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
+filetype indent on      " load filetype-specific indent files
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to (speed boost)
 set showmatch           " highlight matching [{()}]
@@ -82,11 +90,11 @@ nmap <silent> ,/ :nohlsearch<CR>    " clear highlighted text
 " Settings: Folding
 "----------------------------------------------------------------------
 
-set foldenable          " enable folding
-set foldlevelstart=10   " open most folds by default
-set foldnestmax=10      " 10 nested fold max
-nnoremap <space> za     " space key open & closes folds
-set foldmethod=indent   " fold based on indent level
+"set foldenable          " enable folding
+"set foldlevelstart=10   " open most folds by default
+"set foldnestmax=10      " 10 nested fold max
+"nnoremap <space> za     " space key open & closes folds
+"set foldmethod=indent   " fold based on indent level
 
 "----------------------------------------------------------------------
 " Settings: Bindings
@@ -94,7 +102,7 @@ set foldmethod=indent   " fold based on indent level
 
 nnoremap ; :
 
-inoremap jk <esc>       " jk is escape
+call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 
 set pastetoggle=<F4>
 
@@ -141,6 +149,19 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
+
+"----------------------------------------------------------------------
+" Settings: delimitMate
+"----------------------------------------------------------------------
+
+let delimitMate_expand_cr = 2
+let delimitMate_expand_space = 1
+"let delimitMate_expand_inside_quotes = 1
+let delimitMate_jump_expansion = 1
+let delimitMate_smart_quotes = 1
+let delimitMate_balance_matchpairs = 1
+
+au FileType c,javascript,typescript let b:delimitMate_eol_marker = ";"
 
 "----------------------------------------------------------------------
 " Settings: NERDTree
@@ -190,12 +211,12 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+  "return neocomplete#close_popup() . "\<CR>"
   " For no inserting <CR> key.
   "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
+"endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.

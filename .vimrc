@@ -31,8 +31,19 @@ Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'wavded/vim-stylus'
 
+" haskell
+Bundle 'lukerandall/haskellmode-vim'
+Bundle 'eagletmt/neco-ghc'
+
 filetype plugin indent on     " required!
- 
+
+ "----------------------------------------------------------------------
+" Color Scheme: Solarized
+"----------------------------------------------------------------------
+
+syntax on
+colorscheme solarized
+
 "----------------------------------------------------------------------
 " Settings: General
 "----------------------------------------------------------------------
@@ -122,13 +133,6 @@ nnoremap <C-H> <C-W><C-H>
 
 map gt :bprev<Return>
 map gT :bnext<Return>
-
-"----------------------------------------------------------------------
-" Color Scheme: Solarized
-"----------------------------------------------------------------------
-
-syntax on
-colorscheme solarized
 
 "----------------------------------------------------------------------
 " Settings: File Types
@@ -250,3 +254,8 @@ noremap  <buffer> <silent> k gk
 noremap  <buffer> <silent> j gj
 noremap  <buffer> <silent> 0 g0
 noremap  <buffer> <silent> $ g$
+
+"----------------------------------------------------------------------
+" Settings: Haskell
+"----------------------------------------------------------------------
+let g:haddock_browser = '<F6>'

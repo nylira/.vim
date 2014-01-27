@@ -16,6 +16,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'kana/vim-arpeggio'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Raimondi/delimitMate'
+Bundle 'rking/ag.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'Shougo/neocomplete.vim'
@@ -29,6 +30,7 @@ Bundle 'elzr/vim-json'
 Bundle 'gkz/vim-ls'
 Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
+Bundle 'plasticboy/vim-markdown'
 Bundle 'wavded/vim-stylus'
 
 " haskell
@@ -131,8 +133,8 @@ nnoremap <C-H> <C-W><C-H>
 " Settings: Buffers
 "----------------------------------------------------------------------
 
-map gt :bprev<Return>
-map gT :bnext<Return>
+map gt :bp<cr>
+map gT :bn<cr>
 
 "----------------------------------------------------------------------
 " Settings: File Types
@@ -163,7 +165,7 @@ let delimitMate_expand_space = 1
 "let delimitMate_expand_inside_quotes = 1
 let delimitMate_jump_expansion = 1
 let delimitMate_smart_quotes = 1
-let delimitMate_balance_matchpairs = 1
+"let delimitMate_balance_matchpairs = 1
 
 au FileType c,javascript,typescript let b:delimitMate_eol_marker = ";"
 
@@ -259,3 +261,9 @@ noremap  <buffer> <silent> $ g$
 " Settings: Haskell
 "----------------------------------------------------------------------
 let g:haddock_browser = '<F6>'
+
+"----------------------------------------------------------------------
+" Settings: plasticboy/vim-markdown
+"----------------------------------------------------------------------
+
+let g:vim_markdown_folding_disabled=1

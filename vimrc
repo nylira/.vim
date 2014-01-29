@@ -15,6 +15,7 @@ Bundle 'gmarik/vundle'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'kana/vim-arpeggio'
 Bundle 'kien/ctrlp.vim'
+Bundle 'mbbill/undotree'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rking/ag.vim'
 Bundle 'scrooloose/nerdtree'
@@ -58,6 +59,7 @@ set history=1000                " remember more
 set undolevels=1000             " undo all the things
 set visualbell                  " don't beep
 set noerrorbells                " don't beep
+set autochdir                   " set directory based on open file
 
 set backspace=indent,eol,start  " fix backspace
 
@@ -117,7 +119,7 @@ nnoremap ; :
 
 call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 
-set pastetoggle=<F4>
+set pastetoggle=<F3>
 
 " edit splits easier
 map <C-\> :vsplit<cr>
@@ -184,12 +186,24 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 
 let g:ctrlp_map = '<F1>'
 let g:ctrlp_cmd = 'CtrlP'
-nnoremap <F3> :CtrlPBuffer<CR>
 
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = '\vbuild/|dist/|venv/|\.(o|swp|pyc|egg)$'
+
+"----------------------------------------------------------------------
+" Settings: udotree
+"----------------------------------------------------------------------
+
+nnoremap <F5> :UndotreeToggle<cr>
+
+if has("persistent_undo")
+  set undofile
+  set undodir=$HOME/.vim/undo
+  set undolevels=1024         " How many undos
+  set undoreload=32768        " number of lines to save for undo
+endif
 
 "----------------------------------------------------------------------
 " Settings: Shougo/neocomplete

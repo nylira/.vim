@@ -46,6 +46,8 @@ filetype plugin indent on     " required!
 
 syntax on
 colorscheme solarized
+set background=dark
+set guifont=Consolas:h14
 
 "----------------------------------------------------------------------
 " Settings: General
@@ -59,7 +61,7 @@ set history=1000                " remember more
 set undolevels=1000             " undo all the things
 set visualbell                  " don't beep
 set noerrorbells                " don't beep
-set autochdir                   " set directory based on open file
+"set autochdir                   " set directory based on open file
 
 set backspace=indent,eol,start  " fix backspace
 
@@ -164,12 +166,12 @@ set writebackup
 
 let delimitMate_expand_cr = 2
 let delimitMate_expand_space = 1
-"let delimitMate_expand_inside_quotes = 1
+let delimitMate_expand_inside_quotes = 1
 let delimitMate_jump_expansion = 1
 let delimitMate_smart_quotes = 1
-"let delimitMate_balance_matchpairs = 1
+let delimitMate_balance_matchpairs = 1
 
-au FileType c,javascript,typescript let b:delimitMate_eol_marker = ";"
+"au FileType c,cs,javascript,typescript let b:delimitMate_eol_marker = ';'
 
 "----------------------------------------------------------------------
 " Settings: NERDTree
@@ -190,13 +192,13 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_custom_ignore = '\vbuild/|dist/|venv/|\.(o|swp|pyc|egg)$'
+let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|node_modules)$'
 
 "----------------------------------------------------------------------
 " Settings: udotree
 "----------------------------------------------------------------------
 
-nnoremap <F5> :UndotreeToggle<cr>
+nnoremap <F4> :UndotreeToggle<cr>
 
 if has("persistent_undo")
   set undofile

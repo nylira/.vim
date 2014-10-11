@@ -2,51 +2,59 @@
 " Bundle Management: Vundle
 "----------------------------------------------------------------------
 
+set nocompatible
 filetype off                  " required!
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " plugins 
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'kana/vim-arpeggio'
-Bundle 'kien/ctrlp.vim'
-Bundle 'mbbill/undotree'
-Bundle 'Raimondi/delimitMate'
-Bundle 'rking/ag.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'Shougo/neocomplete.vim'
-Bundle 'zefei/buftabs'
-Bundle 'tpope/vim-dispatch'
-Bundle 'tpope/vim-surround'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'kana/vim-arpeggio'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mbbill/undotree'
+Plugin 'Raimondi/delimitMate'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'zefei/buftabs'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-surround'
 
-" syntax highlighting and support
-Bundle 'digitaltoad/vim-jade'
-Bundle 'elzr/vim-json'
-Bundle 'gkz/vim-ls'
-Bundle 'othree/html5.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'wavded/vim-stylus'
+" language support
+Plugin 'digitaltoad/vim-jade'
+Plugin 'elzr/vim-json'
+Plugin 'fatih/vim-go'
+Plugin 'gkz/vim-ls'
+Plugin 'othree/html5.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'tpope/vim-rails'
+Plugin 'wavded/vim-stylus'
+
 
 " haskell
-Bundle 'lukerandall/haskellmode-vim'
-Bundle 'eagletmt/neco-ghc'
+Plugin 'dag/vim2hs'
+"Plugin 'lukerandall/haskellmode-vim'
+Plugin 'eagletmt/neco-ghc'
 
+call vundle#end()
 filetype plugin indent on     " required!
 
  "----------------------------------------------------------------------
 " Color Scheme: Solarized
 "----------------------------------------------------------------------
 
-syntax on
-colorscheme solarized
+syntax enable
 set background=dark
+colorscheme solarized
+let g:solarized_termcolors=16
+
 set guifont=Consolas:h14
 
 "----------------------------------------------------------------------
@@ -137,8 +145,8 @@ nnoremap <C-H> <C-W><C-H>
 " Settings: Buffers
 "----------------------------------------------------------------------
 
-map gt :bp<cr>
-map gT :bn<cr>
+map gt :bn<cr>
+"map gT :bn<cr>
 
 "----------------------------------------------------------------------
 " Settings: File Types
@@ -148,7 +156,7 @@ map gT :bn<cr>
 autocmd FileType make setlocal noexpandtab
 
 " livescript autocompile
-au BufWritePost *.ls silent LiveScriptMake! -d | cwindow | redraw!
+"au BufWritePost *.ls silent LiveScriptMake! -d | cwindow | redraw!
 
 "----------------------------------------------------------------------
 " Settings: Backup
@@ -283,3 +291,8 @@ let g:haddock_browser = '<F6>'
 "----------------------------------------------------------------------
 
 let g:vim_markdown_folding_disabled=1
+
+"----------------------------------------------------------------------
+" Settings: C++
+"----------------------------------------------------------------------
+autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR> '

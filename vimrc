@@ -10,7 +10,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " plugins 
 Plugin 'altercation/vim-colors-solarized'
@@ -33,6 +33,7 @@ Plugin 'gkz/vim-ls'
 Plugin 'othree/html5.vim'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-rails'
+Plugin 'vim-scripts/SQLComplete.vim'
 Plugin 'wavded/vim-stylus'
 
 " javascript
@@ -160,8 +161,8 @@ map gt :bn<cr>
 autocmd FileType make setlocal noexpandtab
 
 " livescript autocompile
-let livescript_make_options = '--bare'
-au BufWritePost *.ls silent LiveScriptMake! -d | cwindow | redraw!
+"let livescript_make_options = '--bare'
+"au BufWritePost *.ls silent LiveScriptMake! -d | cwindow | redraw!
 
 "----------------------------------------------------------------------
 " Settings: Backup

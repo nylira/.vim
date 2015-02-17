@@ -24,6 +24,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'zefei/buftabs'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
 
 " language support
 Plugin 'digitaltoad/vim-jade'
@@ -244,11 +245,23 @@ let g:vim_markdown_folding_disabled=1
 "----------------------------------------------------------------------
 " Settings: C++
 "----------------------------------------------------------------------
+"
 autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR> '
 
- "----------------------------------------------------------------------
+"----------------------------------------------------------------------
 " Settings: Syntastic
 "----------------------------------------------------------------------
 
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['jslint']
+let g:syntastic_json_checkers=['jsonlint']
+let g:syntastic_always_populate_loc_list = 1
+
+" make json files get validated
+au BufRead,BufNewFile *.json set filetype=json
+
+ "----------------------------------------------------------------------
+" Settings: whitespace
+"----------------------------------------------------------------------
+"
+autocmd BufWritePre *.js :%s/\s\+$//e
 

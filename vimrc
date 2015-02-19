@@ -25,6 +25,7 @@ Plugin 'zefei/buftabs'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'Valloric/YouCompleteMe'
 
 " language support
 Plugin 'digitaltoad/vim-jade'
@@ -42,7 +43,6 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'vim-scripts/JavaScript-Indent'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'moll/vim-node'
-
 
 " haskell
 Plugin 'dag/vim2hs'
@@ -252,7 +252,7 @@ autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -o '
 " Settings: Syntastic
 "----------------------------------------------------------------------
 
-let g:syntastic_javascript_checkers = ['jslint']
+let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_always_populate_loc_list = 1
 

@@ -259,9 +259,16 @@ let g:syntastic_always_populate_loc_list = 1
 " make json files get validated
 au BufRead,BufNewFile *.json set filetype=json
 
- "----------------------------------------------------------------------
+"----------------------------------------------------------------------
 " Settings: whitespace
 "----------------------------------------------------------------------
-"
+
 autocmd BufWritePre *.js :%s/\s\+$//e
+
+
+"----------------------------------------------------------------------
+" Settings: youcompleteme
+"----------------------------------------------------------------------
+"
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 

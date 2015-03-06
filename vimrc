@@ -26,6 +26,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'danro/rename.vim'
 
 " language support
 Plugin 'digitaltoad/vim-jade'
@@ -86,6 +87,9 @@ augroup myvimrchooks
   au!
   autocmd bufwritepost .vimrc source ~/.vimrc
 augroup END
+
+" clipboard
+set clipboard=unnamed
 
 "----------------------------------------------------------------------
 " Settings: Spaces & Tabs
@@ -210,7 +214,7 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|node_modules)$'
 
 "----------------------------------------------------------------------
-" Settings: udotree
+" Settings: undotree
 "----------------------------------------------------------------------
 
 nnoremap <F4> :UndotreeToggle<cr>
@@ -243,12 +247,6 @@ let g:haddock_browser = '<F6>'
 let g:vim_markdown_folding_disabled=1
 
 "----------------------------------------------------------------------
-" Settings: C++
-"----------------------------------------------------------------------
-"
-autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR> '
-
-"----------------------------------------------------------------------
 " Settings: Syntastic
 "----------------------------------------------------------------------
 
@@ -272,3 +270,29 @@ autocmd BufWritePre *.js :%s/\s\+$//e
 "
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 
+"----------------------------------------------------------------------
+" Settings: copy paste
+"----------------------------------------------------------------------
+ 
+" I haven't found how to hide this function (yet)
+function! RestoreRegister()
+  let @" = s:restore_reg
+  if &clipboard == "unnamed"
+    let @* = s:restore_reg
+  endif
+  return ''
+endfunction
+
+function! s:Repl()
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
+endfunction
+
+" NB: this supports "rp that replaces the selection by the contents of @r
+vnoremap <silent> <expr> p <sid>Repl()
+
+"----------------------------------------------------------------------
+" Settings: search visually
+"----------------------------------------------------------------------
+
+vnoremap // y/<C-R>"<CR>

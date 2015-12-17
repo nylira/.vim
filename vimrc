@@ -15,7 +15,7 @@ Plugin 'gmarik/Vundle.vim'
 " plugins 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'kana/vim-arpeggio'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mbbill/undotree'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rking/ag.vim'
@@ -25,8 +25,9 @@ Plugin 'zefei/buftabs'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'danro/rename.vim'
+Plugin 'ervandew/supertab'
+
 
 " language support
 Plugin 'digitaltoad/vim-jade'
@@ -34,16 +35,22 @@ Plugin 'elzr/vim-json'
 Plugin 'fatih/vim-go'
 Plugin 'gkz/vim-ls'
 Plugin 'othree/html5.vim'
-Plugin 'plasticboy/vim-markdown'
+"Plugin 'godlygeek/tabular'
+"Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-rails'
 Plugin 'vim-scripts/SQLComplete.vim'
 Plugin 'wavded/vim-stylus'
+Plugin 'keith/swift.vim'
+Plugin 'posva/vim-vue'
+Plugin 'kchmck/vim-coffee-script'
 
 " javascript
 Plugin 'marijnh/tern_for_vim'
+
+Plugin 'moll/vim-node'
 Plugin 'vim-scripts/JavaScript-Indent'
 Plugin 'jelera/vim-javascript-syntax'
-Plugin 'moll/vim-node'
+
 
 " haskell
 Plugin 'dag/vim2hs'
@@ -253,6 +260,19 @@ let g:vim_markdown_folding_disabled=1
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_html_checkers=['']
+let g:syntastic_html_tidy_ignore_errors = [
+    \ 'proprietary attribute "v-'
+    \ , 'trimming empty'
+    \ , '<base> escaping malformed URI reference'
+    \ , '<link> escaping malformed URI reference'
+    \ , 'proprietary attribute "required'
+    \ , 'proprietary attribute "novalidate'
+    \ , 'proprietary attribute "analytics'
+    \ , 'proprietary attribute "placeholder'
+    \ , 'proprietary attribute "hidden'
+    \ , 'missing <li>'
+    \ ]
 
 " make json files get validated
 au BufRead,BufNewFile *.json set filetype=json
@@ -268,7 +288,7 @@ autocmd BufWritePre *.js :%s/\s\+$//e
 " Settings: youcompleteme
 "----------------------------------------------------------------------
 "
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+"let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 
 "----------------------------------------------------------------------
 " Settings: copy paste

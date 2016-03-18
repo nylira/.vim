@@ -10,24 +10,19 @@ call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " plugins 
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'kana/vim-arpeggio'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'mbbill/undotree'
-Plugin 'Raimondi/delimitMate'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'zefei/buftabs'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'danro/rename.vim'
-Plugin 'ervandew/supertab'
-
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'Raimondi/delimitMate'
 
 " language support
 Plugin 'digitaltoad/vim-jade'
@@ -35,27 +30,13 @@ Plugin 'elzr/vim-json'
 Plugin 'fatih/vim-go'
 Plugin 'gkz/vim-ls'
 Plugin 'othree/html5.vim'
-"Plugin 'godlygeek/tabular'
-"Plugin 'plasticboy/vim-markdown'
-Plugin 'tpope/vim-rails'
-Plugin 'vim-scripts/SQLComplete.vim'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'wavded/vim-stylus'
-Plugin 'keith/swift.vim'
 Plugin 'posva/vim-vue'
-Plugin 'kchmck/vim-coffee-script'
 
 " javascript
-Plugin 'marijnh/tern_for_vim'
-
-Plugin 'moll/vim-node'
-Plugin 'vim-scripts/JavaScript-Indent'
 Plugin 'jelera/vim-javascript-syntax'
-
-
-" haskell
-Plugin 'dag/vim2hs'
-"Plugin 'lukerandall/haskellmode-vim'
-Plugin 'eagletmt/neco-ghc'
+Plugin 'gavocanov/vim-js-indent'
 
 call vundle#end()
 filetype plugin indent on     " required!
@@ -112,7 +93,7 @@ set expandtab            " tabs are spaces
 "----------------------------------------------------------------------
 
 set number              " show line numbers
-set relativenumber      " show relative numbers in insert
+"set relativenumber      " show relative numbers in insert
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 filetype indent on      " load filetype-specific indent files
@@ -144,8 +125,6 @@ nmap <silent> ,/ :nohlsearch<CR>    " clear highlighted text
 
 nnoremap ; :
 
-call arpeggio#map('i', '', 0, 'jk', '<Esc>')
-
 set pastetoggle=<F3>
 
 " edit splits easier
@@ -163,7 +142,7 @@ nnoremap <C-H> <C-W><C-H>
 "----------------------------------------------------------------------
 
 map gt :bn<cr>
-"map gT :bn<cr>
+map gT :bn<cr>
 
 "----------------------------------------------------------------------
 " Settings: File Types
@@ -220,6 +199,18 @@ let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|node_modules)$'
 
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
 "----------------------------------------------------------------------
 " Settings: undotree
 "----------------------------------------------------------------------
@@ -257,7 +248,7 @@ let g:vim_markdown_folding_disabled=1
 " Settings: Syntastic
 "----------------------------------------------------------------------
 
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_html_checkers=['']
@@ -291,28 +282,89 @@ autocmd BufWritePre *.js :%s/\s\+$//e
 "let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 
 "----------------------------------------------------------------------
-" Settings: copy paste
-"----------------------------------------------------------------------
- 
-" I haven't found how to hide this function (yet)
-function! RestoreRegister()
-  let @" = s:restore_reg
-  if &clipboard == "unnamed"
-    let @* = s:restore_reg
-  endif
-  return ''
-endfunction
-
-function! s:Repl()
-  let s:restore_reg = @"
-  return "p@=RestoreRegister()\<cr>"
-endfunction
-
-" NB: this supports "rp that replaces the selection by the contents of @r
-vnoremap <silent> <expr> p <sid>Repl()
-
-"----------------------------------------------------------------------
 " Settings: search visually
 "----------------------------------------------------------------------
 
 vnoremap // y/<C-R>"<CR>
+
+
+"----------------------------------------------------------------------
+" Settings: search visually
+"----------------------------------------------------------------------
+let g:vim_markdown_no_default_key_mappings = 1
+
+"----------------------------------------------------------------------
+" Settings: neocomplete 
+"----------------------------------------------------------------------
+
+"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'

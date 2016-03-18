@@ -9,7 +9,6 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
 " let Vundle manage Vundle
-" required! 
 Plugin 'VundleVim/Vundle.vim'
 
 " plugins 
@@ -64,19 +63,10 @@ set history=1000                " remember more
 set undolevels=1000             " undo all the things
 set visualbell                  " don't beep
 set noerrorbells                " don't beep
-"set autochdir                   " set directory based on open file
-
 set backspace=indent,eol,start  " fix backspace
 
 let &showbreak=repeat(' ', 2)   " make long lines slightly indented
 
-" auto reload .vimrc
-augroup myvimrchooks
-  au!
-  autocmd bufwritepost .vimrc source ~/.vimrc
-augroup END
-
-" clipboard
 set clipboard=unnamed
 
 "----------------------------------------------------------------------
@@ -93,7 +83,6 @@ set expandtab            " tabs are spaces
 "----------------------------------------------------------------------
 
 set number              " show line numbers
-"set relativenumber      " show relative numbers in insert
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 filetype indent on      " load filetype-specific indent files
@@ -108,16 +97,6 @@ set showmatch           " highlight matching [{()}]
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 nmap <silent> ,/ :nohlsearch<CR>    " clear highlighted text
-
-"----------------------------------------------------------------------
-" Settings: Folding
-"----------------------------------------------------------------------
-
-"set foldenable          " enable folding
-"set foldlevelstart=10   " open most folds by default
-"set foldnestmax=10      " 10 nested fold max
-"nnoremap <space> za     " space key open & closes folds
-"set foldmethod=indent   " fold based on indent level
 
 "----------------------------------------------------------------------
 " Settings: Bindings
@@ -151,10 +130,6 @@ map gT :bn<cr>
 " Makefile - tab instead of space"
 autocmd FileType make setlocal noexpandtab
 
-" livescript autocompile
-"let livescript_make_options = '--bare'
-"au BufWritePost *.ls silent LiveScriptMake! -d | cwindow | redraw!
-
 "----------------------------------------------------------------------
 " Settings: Backup
 "----------------------------------------------------------------------
@@ -175,8 +150,6 @@ let delimitMate_expand_inside_quotes = 1
 let delimitMate_jump_expansion = 1
 let delimitMate_smart_quotes = 1
 let delimitMate_balance_matchpairs = 1
-
-"au FileType c,cs,javascript,typescript let b:delimitMate_eol_marker = ';'
 
 "----------------------------------------------------------------------
 " Settings: NERDTree
@@ -212,19 +185,6 @@ if executable('ag')
 endif
 
 "----------------------------------------------------------------------
-" Settings: undotree
-"----------------------------------------------------------------------
-
-nnoremap <F4> :UndotreeToggle<cr>
-
-if has("persistent_undo")
-  set undofile
-  set undodir=$HOME/.vim/undo
-  set undolevels=1024         " How many undos
-  set undoreload=32768        " number of lines to save for undo
-endif
-
-"----------------------------------------------------------------------
 " Settings: Bindings!
 "----------------------------------------------------------------------
 
@@ -234,15 +194,11 @@ noremap  <buffer> <silent> 0 g0
 noremap  <buffer> <silent> $ g$
 
 "----------------------------------------------------------------------
-" Settings: Haskell
-"----------------------------------------------------------------------
-let g:haddock_browser = '<F6>'
-
-"----------------------------------------------------------------------
 " Settings: plasticboy/vim-markdown
 "----------------------------------------------------------------------
 
 let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_no_default_key_mappings = 1
 
 "----------------------------------------------------------------------
 " Settings: Syntastic
@@ -265,33 +221,14 @@ let g:syntastic_html_tidy_ignore_errors = [
     \ , 'missing <li>'
     \ ]
 
-" make json files get validated
+" validate json files
 au BufRead,BufNewFile *.json set filetype=json
-
-"----------------------------------------------------------------------
-" Settings: whitespace
-"----------------------------------------------------------------------
-
-autocmd BufWritePre *.js :%s/\s\+$//e
-
-
-"----------------------------------------------------------------------
-" Settings: youcompleteme
-"----------------------------------------------------------------------
-"
-"let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 
 "----------------------------------------------------------------------
 " Settings: search visually
 "----------------------------------------------------------------------
 
 vnoremap // y/<C-R>"<CR>
-
-
-"----------------------------------------------------------------------
-" Settings: search visually
-"----------------------------------------------------------------------
-let g:vim_markdown_no_default_key_mappings = 1
 
 "----------------------------------------------------------------------
 " Settings: neocomplete 

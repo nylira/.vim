@@ -3,52 +3,45 @@
 "----------------------------------------------------------------------
 
 set nocompatible
-filetype off                  " required!
-
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-
-" let Vundle manage Vundle
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " plugins 
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'rking/ag.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'zefei/buftabs'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'danro/rename.vim'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Raimondi/delimitMate'
+Plug 'altercation/vim-colors-solarized'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'zefei/buftabs'
+Plug 'tpope/vim-unimpaired'
+Plug 'danro/rename.vim'
+Plug 'Shougo/neocomplete.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'kana/vim-arpeggio'
 
 " language support
-Plugin 'digitaltoad/vim-jade'
-Plugin 'elzr/vim-json'
-Plugin 'fatih/vim-go'
-Plugin 'gkz/vim-ls'
-Plugin 'othree/html5.vim'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'wavded/vim-stylus'
-Plugin 'posva/vim-vue'
+"Plug 'digitaltoad/vim-pug'
+Plug 'elzr/vim-json'
+Plug 'fatih/vim-go'
+Plug 'gkz/vim-ls'
+Plug 'othree/html5.vim'
+Plug 'plasticboy/vim-markdown'
+Plug 'wavded/vim-stylus'
+Plug 'posva/vim-vue'
 
 " javascript
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'gavocanov/vim-js-indent'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'gavocanov/vim-js-indent'
 
-call vundle#end()
-filetype plugin indent on     " required!
+" Add plugins to &runtimepath
+call plug#end()
 
  "----------------------------------------------------------------------
-" Color Scheme: Solarized
+" Color Scheme
 "----------------------------------------------------------------------
 
 syntax enable
 set background=dark
 colorscheme solarized
-let g:solarized_termcolors=16
-
 set guifont=Consolas:h14
 
 "----------------------------------------------------------------------
@@ -88,6 +81,7 @@ set cursorline          " highlight current line
 filetype indent on      " load filetype-specific indent files
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to (speed boost)
+set ttyfast
 set showmatch           " highlight matching [{()}]
 
 "----------------------------------------------------------------------
@@ -305,3 +299,25 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+"----------------------------------------------------------------------
+" Settings: vim-go 
+"----------------------------------------------------------------------
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+"----------------------------------------------------------------------
+" Settings: arpeggio
+"----------------------------------------------------------------------
+
+call arpeggio#map('i', '', 0, 'jk', '<Esc>')
+
+"----------------------------------------------------------------------
+" Settings: buffers
+"----------------------------------------------------------------------
+
+let g:buftabline_numbers = 1 

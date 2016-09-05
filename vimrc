@@ -75,7 +75,7 @@ set expandtab            " tabs are spaces
 " Settings: UI Config
 "----------------------------------------------------------------------
 
-set number              " show line numbers
+"set number              " show line numbers
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 filetype indent on      " load filetype-specific indent files
@@ -158,7 +158,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 " Settings: CtrlP (ctrlp)
 "----------------------------------------------------------------------
 
-"let g:ctrlp_map = '<F1>'
+let g:ctrlp_map = '<F1>'
 let g:ctrlp_cmd = 'CtrlP'
 
 let g:ctrlp_match_window = 'bottom,order:ttb'

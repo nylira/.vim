@@ -62,6 +62,8 @@ let &showbreak=repeat(' ', 2)   " make long lines slightly indented
 
 set clipboard=unnamed
 
+set autoread                    " automatically reload files
+
 "----------------------------------------------------------------------
 " Settings: Spaces & Tabs
 "----------------------------------------------------------------------
@@ -328,3 +330,17 @@ let g:buftabline_numbers = 1
 "----------------------------------------------------------------------
 
 map <C-n> :NERDTreeToggle<CR>
+
+"----------------------------------------------------------------------
+" Settings: vue
+"----------------------------------------------------------------------
+
+" autocmd BufNewFile,BufRead *.vue set filetype=html "When opening or creating a .vue file set the filetype to HTML for proper rendering
+"
+"
+
+"----------------------------------------------------------------------
+" Settings: new mbp
+"----------------------------------------------------------------------
+" try disabling esc
+inoremap <esc>   <NOP>

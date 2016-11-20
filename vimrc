@@ -39,7 +39,7 @@ call plug#end()
 
 set t_Co=256
 syntax enable
-set background=dark
+set background=light
 
 "----------------------------------------------------------------------
 " Settings: General

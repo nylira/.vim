@@ -6,12 +6,11 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 " plugins 
-Plug 'chriskempson/base16-vim'
+Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'zefei/buftabs'
 Plug 'tpope/vim-unimpaired'
 Plug 'danro/rename.vim'
 Plug 'Shougo/neocomplete.vim'
@@ -38,8 +37,9 @@ call plug#end()
 " Color Scheme
 "----------------------------------------------------------------------
 
+set t_Co=256
 syntax enable
-colorscheme base16-github
+set background=dark
 
 "----------------------------------------------------------------------
 " Settings: General
@@ -49,7 +49,7 @@ set exrc
 set hidden                      " switch buffers w/o saving
 set fileencodings=utf-8
 set scrolloff=999
-set history=1000                " remember more 
+set history=1001                " remember more 
 set undolevels=1000             " undo all the things
 set visualbell                  " don't beep
 set noerrorbells                " don't beep
@@ -315,13 +315,13 @@ let g:go_highlight_build_constraints = 1
 call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 
 "----------------------------------------------------------------------
-" Settings: buffers
-"----------------------------------------------------------------------
-
-let g:buftabline_numbers = 1 
-
-"----------------------------------------------------------------------
 " Settings: nerdtree
 "----------------------------------------------------------------------
 
 map <C-n> :NERDTreeToggle<CR>
+
+"----------------------------------------------------------------------
+" Settings: airline
+"----------------------------------------------------------------------
+
+let g:airline#extensions#tabline#enabled = 2

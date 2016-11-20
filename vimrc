@@ -15,7 +15,8 @@ Plug 'danro/rename.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'kana/vim-arpeggio'
-Plug 'vim-scripts/buftabs'
+"Plug 'vim-scripts/buftabs'
+Plug 'ap/vim-buftabline'
 
 " language support
 Plug 'elzr/vim-json'
@@ -321,7 +322,7 @@ call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 map <C-n> :NERDTreeToggle<CR>
 
 "----------------------------------------------------------------------
-" Settings: buftabs
+" Settings: buftabline
 "----------------------------------------------------------------------
 
-let g:buftabline_numbers = 1 
+let g:buftabline_numbers = 1

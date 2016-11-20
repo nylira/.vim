@@ -6,7 +6,6 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 " plugins 
-Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
@@ -16,6 +15,7 @@ Plug 'danro/rename.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'kana/vim-arpeggio'
+Plug 'vim-scripts/buftabs'
 
 " language support
 Plug 'elzr/vim-json'
@@ -321,7 +321,7 @@ call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 map <C-n> :NERDTreeToggle<CR>
 
 "----------------------------------------------------------------------
-" Settings: airline
+" Settings: buftabs
 "----------------------------------------------------------------------
 
-let g:airline#extensions#tabline#enabled = 2
+let g:buftabline_numbers = 1 

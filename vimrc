@@ -19,7 +19,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'kana/vim-arpeggio'
 
 " language support
-"Plug 'digitaltoad/vim-pug'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'gkz/vim-ls'
@@ -41,7 +40,6 @@ call plug#end()
 
 syntax enable
 colorscheme base16-github
-set guifont=Consolas:h14
 
 "----------------------------------------------------------------------
 " Settings: General
@@ -76,9 +74,7 @@ set expandtab            " tabs are spaces
 " Settings: UI Config
 "----------------------------------------------------------------------
 
-"set number              " show line numbers
 set showcmd             " show command in bottom bar
-"set cursorline          " highlight current line
 filetype indent on      " load filetype-specific indent files
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to (speed boost)

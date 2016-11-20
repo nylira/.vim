@@ -6,7 +6,7 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 " plugins 
-Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
@@ -40,8 +40,7 @@ call plug#end()
 "----------------------------------------------------------------------
 
 syntax enable
-set background=dark
-colorscheme solarized
+colorscheme base16-github
 set guifont=Consolas:h14
 
 "----------------------------------------------------------------------
@@ -79,7 +78,7 @@ set expandtab            " tabs are spaces
 
 "set number              " show line numbers
 set showcmd             " show command in bottom bar
-set cursorline          " highlight current line
+"set cursorline          " highlight current line
 filetype indent on      " load filetype-specific indent files
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to (speed boost)
@@ -305,6 +304,7 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 "----------------------------------------------------------------------
 " Settings: vim-go 
 "----------------------------------------------------------------------
+
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -324,21 +324,8 @@ call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 
 let g:buftabline_numbers = 1 
 
-
 "----------------------------------------------------------------------
 " Settings: nerdtree
 "----------------------------------------------------------------------
 
 map <C-n> :NERDTreeToggle<CR>
-
-"----------------------------------------------------------------------
-" Settings: vue
-"----------------------------------------------------------------------
-
-" autocmd BufNewFile,BufRead *.vue set filetype=html "When opening or creating a .vue file set the filetype to HTML for proper rendering
-"
-"
-
-"----------------------------------------------------------------------
-" Settings: new mbp
-"----------------------------------------------------------------------

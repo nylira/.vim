@@ -15,8 +15,8 @@ Plug 'danro/rename.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'kana/vim-arpeggio'
-"Plug 'vim-scripts/buftabs'
 Plug 'ap/vim-buftabline'
+Plug 'altercation/vim-colors-solarized'
 
 " language support
 Plug 'elzr/vim-json'
@@ -40,7 +40,8 @@ call plug#end()
 
 set t_Co=256
 syntax enable
-set background=light
+set background=dark
+colorscheme solarized
 
 "----------------------------------------------------------------------
 " Settings: General

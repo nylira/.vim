@@ -47,6 +47,7 @@ colorscheme solarized
 " Settings: General
 "----------------------------------------------------------------------
 
+set nu
 set exrc
 set hidden                      " switch buffers w/o saving
 set fileencodings=utf-8
@@ -327,3 +328,7 @@ map <C-n> :NERDTreeToggle<CR>
 "----------------------------------------------------------------------
 
 let g:buftabline_numbers = 1
+
+" use movement keys over long lines easier
+onoremap <silent> j gj
+onoremap <silent> k gk

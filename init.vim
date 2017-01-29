@@ -9,14 +9,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-unimpaired'
 Plug 'danro/rename.vim'
-Plug 'Shougo/neocomplete.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'kana/vim-arpeggio'
 Plug 'ap/vim-buftabline'
 Plug 'altercation/vim-colors-solarized'
+Plug 'neomake/neomake'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " language support
 Plug 'elzr/vim-json'
@@ -30,8 +30,7 @@ Plug 'posva/vim-vue'
 " javascript
 Plug 'othree/yajs.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
-"Plug 'jelera/vim-javascript-syntax'
-"Plug 'gavocanov/vim-js-indent'
+Plug 'gavocanov/vim-js-indent'
 Plug 'mxw/vim-jsx'
 
 " Add plugins to &runtimepath
@@ -54,6 +53,7 @@ set exrc
 set hidden                      " switch buffers w/o saving
 set fileencodings=utf-8
 set scrolloff=999
+set cursorline
 set history=1001                " remember more 
 set undolevels=1000             " undo all the things
 set visualbell                  " don't beep
@@ -137,6 +137,16 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
 "----------------------------------------------------------------------
+" Settings: neomake
+"----------------------------------------------------------------------
+
+let g:neomake_open_list=2
+let g:neomake_jsx_enabled_makers = ['standard']
+let g:neomake_javascript_enabled_makers = ['standard']
+
+autocmd! BufWritePost * Neomake
+
+"----------------------------------------------------------------------
 " Settings: delimitMate
 "----------------------------------------------------------------------
 
@@ -197,114 +207,10 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_no_default_key_mappings = 1
 
 "----------------------------------------------------------------------
-" Settings: Syntastic
-"----------------------------------------------------------------------
-
-let g:syntastic_javascript_checkers = ['standard']
-let g:syntastic_json_checkers=['jsonlint']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_html_checkers=['']
-let g:syntastic_html_tidy_ignore_errors = [
-    \ 'proprietary attribute "v-'
-    \ , 'trimming empty'
-    \ , '<base> escaping malformed URI reference'
-    \ , '<link> escaping malformed URI reference'
-    \ , 'proprietary attribute "required'
-    \ , 'proprietary attribute "novalidate'
-    \ , 'proprietary attribute "analytics'
-    \ , 'proprietary attribute "placeholder'
-    \ , 'proprietary attribute "hidden'
-    \ , 'missing <li>'
-    \ ]
-
-" validate json files
-au BufRead,BufNewFile *.json set filetype=json
-
-" auto format js
-autocmd bufwritepost *.js silent !standard --fix %
-set autoread
-
-"----------------------------------------------------------------------
 " Settings: search visually
 "----------------------------------------------------------------------
 
 vnoremap // y/<C-R>"<CR>
-
-"----------------------------------------------------------------------
-" Settings: neocomplete 
-"----------------------------------------------------------------------
-
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 "----------------------------------------------------------------------
 " Settings: vim-go 
@@ -343,3 +249,8 @@ onoremap <silent> k gk
 " Settings: jsx
 "----------------------------------------------------------------------
 let g:jsx_ext_required = 0
+
+"----------------------------------------------------------------------
+" Settings: deoplete
+"----------------------------------------------------------------------
+let g:deoplete#enable_at_startup = 1

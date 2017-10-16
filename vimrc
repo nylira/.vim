@@ -19,13 +19,14 @@ Plug 'ap/vim-buftabline'
 Plug 'altercation/vim-colors-solarized'
 
 " language support
+Plug 'digitaltoad/vim-pug'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'gkz/vim-ls'
 Plug 'othree/html5.vim'
 Plug 'plasticboy/vim-markdown'
-Plug 'wavded/vim-stylus'
 Plug 'posva/vim-vue'
+Plug 'wavded/vim-stylus'
 
 " javascript
 Plug 'othree/yajs.vim'

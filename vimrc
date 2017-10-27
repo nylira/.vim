@@ -26,14 +26,12 @@ Plug 'gkz/vim-ls'
 Plug 'othree/html5.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'posva/vim-vue'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
 Plug 'wavded/vim-stylus'
 
 " javascript
-Plug 'othree/yajs.vim'
-Plug 'othree/javascript-libraries-syntax.vim'
-"Plug 'jelera/vim-javascript-syntax'
-"Plug 'gavocanov/vim-js-indent'
-Plug 'mxw/vim-jsx'
+Plug 'jelera/vim-javascript-syntax'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -222,8 +220,8 @@ let g:syntastic_html_tidy_ignore_errors = [
 au BufRead,BufNewFile *.json set filetype=json
 
 " auto format js
-autocmd bufwritepost *.js silent !standard --fix %
-set autoread
+" autocmd bufwritepost *.js silent !standard --fix %
+" set autoread
 
 "----------------------------------------------------------------------
 " Settings: search visually

@@ -3,7 +3,7 @@
 "----------------------------------------------------------------------
 
 set nocompatible
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 " plugins 
 Plug 'ctrlpvim/ctrlp.vim'
@@ -24,6 +24,7 @@ Plug 'digitaltoad/vim-pug'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'gkz/vim-ls'
+Plug 'neovimhaskell/haskell-vim'
 Plug 'othree/html5.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'posva/vim-vue'
@@ -34,6 +35,7 @@ Plug 'wavded/vim-stylus'
 
 " javascript
 Plug 'jelera/vim-javascript-syntax'
+Plug 'mxw/vim-jsx'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -152,7 +154,7 @@ let delimitMate_balance_matchpairs = 1
 " Settings: NERDTree
 "----------------------------------------------------------------------
 
-nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 " open the old buffer instead a new one
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif   
@@ -161,7 +163,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 " Settings: CtrlP (ctrlp)
 "----------------------------------------------------------------------
 
-let g:ctrlp_map = '<F1>'
+let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 let g:ctrlp_match_window = 'bottom,order:ttb'

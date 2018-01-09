@@ -3,7 +3,7 @@
 "----------------------------------------------------------------------
 
 set nocompatible
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 " plugins 
 Plug 'ctrlpvim/ctrlp.vim'
@@ -17,6 +17,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'kana/vim-arpeggio'
 Plug 'ap/vim-buftabline'
 Plug 'altercation/vim-colors-solarized'
+Plug 'ntpeters/vim-better-whitespace'
 
 " language support
 Plug 'cespare/vim-toml'
@@ -152,7 +153,7 @@ let delimitMate_balance_matchpairs = 1
 " Settings: NERDTree
 "----------------------------------------------------------------------
 
-nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 " open the old buffer instead a new one
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif   
@@ -161,7 +162,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 " Settings: CtrlP (ctrlp)
 "----------------------------------------------------------------------
 
-let g:ctrlp_map = '<F1>'
+let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 let g:ctrlp_match_window = 'bottom,order:ttb'
@@ -169,15 +170,9 @@ let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|node_modules)$'
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
 endif
 
@@ -325,7 +320,7 @@ let g:go_highlight_build_constraints = 1
 call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 
 "----------------------------------------------------------------------
-" Settings: nerdtree
+" Settings: nerdtree, ctrl p
 "----------------------------------------------------------------------
 
 map <C-n> :NERDTreeToggle<CR>

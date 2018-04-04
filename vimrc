@@ -24,6 +24,7 @@ Plug 'digitaltoad/vim-pug'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'gkz/vim-ls'
+Plug 'neovimhaskell/haskell-vim'
 Plug 'othree/html5.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'posva/vim-vue'
@@ -36,6 +37,7 @@ Plug 'sekel/vim-vue-syntastic'
 
 " javascript
 Plug 'jelera/vim-javascript-syntax'
+Plug 'mxw/vim-jsx'
 
 " Add plugins to &runtimepath
 call plug#end()

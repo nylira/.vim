@@ -5,14 +5,13 @@
 set nocompatible
 call plug#begin('~/.local/share/nvim/plugged')
 
-" plugins 
+" plugins
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-unimpaired'
 Plug 'danro/rename.vim'
-Plug 'Shougo/neocomplete.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'kana/vim-arpeggio'
 Plug 'ap/vim-buftabline'
@@ -28,10 +27,12 @@ Plug 'gkz/vim-ls'
 Plug 'othree/html5.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'posva/vim-vue'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 Plug 'wavded/vim-stylus'
+Plug 'sekel/vim-vue-syntastic'
 
 " javascript
 Plug 'jelera/vim-javascript-syntax'
@@ -198,6 +199,7 @@ let g:vim_markdown_no_default_key_mappings = 1
 
 let g:syntastic_javascript_checkers = ['standard']
 let g:syntastic_json_checkers=['jsonlint']
+let g:syntastic_vue_checkers = ['standard', 'eslint']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_html_checkers=['']
 let g:syntastic_html_tidy_ignore_errors = [
@@ -225,82 +227,6 @@ au BufRead,BufNewFile *.json set filetype=json
 "----------------------------------------------------------------------
 
 vnoremap // y/<C-R>"<CR>
-
-"----------------------------------------------------------------------
-" Settings: neocomplete 
-"----------------------------------------------------------------------
-
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 "----------------------------------------------------------------------
 " Settings: vim-go 

@@ -20,6 +20,7 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " language support
 Plug 'cespare/vim-toml'
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'digitaltoad/vim-pug'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
@@ -30,10 +31,10 @@ Plug 'plasticboy/vim-markdown'
 Plug 'posva/vim-vue'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'rust-lang/rust.vim'
+Plug 'sekel/vim-vue-syntastic'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 Plug 'wavded/vim-stylus'
-Plug 'sekel/vim-vue-syntastic'
 
 " javascript
 Plug 'jelera/vim-javascript-syntax'
@@ -199,9 +200,9 @@ let g:vim_markdown_no_default_key_mappings = 1
 " Settings: Syntastic
 "----------------------------------------------------------------------
 
-let g:syntastic_javascript_checkers = ['standard']
-let g:syntastic_json_checkers=['jsonlint']
-let g:syntastic_vue_checkers = ['standard', 'eslint']
+"let g:syntastic_javascript_checkers = ['standard']
+"let g:syntastic_json_checkers=['jsonlint']
+"let g:syntastic_vue_checkers = ['standard', 'eslint']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_html_checkers=['']
 let g:syntastic_html_tidy_ignore_errors = [
@@ -220,9 +221,12 @@ let g:syntastic_html_tidy_ignore_errors = [
 " validate json files
 au BufRead,BufNewFile *.json set filetype=json
 
-" auto format js
-" autocmd bufwritepost *.js silent !standard --fix %
-" set autoread
+"----------------------------------------------------------------------
+" Settings: prettier
+"----------------------------------------------------------------------
+
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 "----------------------------------------------------------------------
 " Settings: search visually
@@ -231,7 +235,7 @@ au BufRead,BufNewFile *.json set filetype=json
 vnoremap // y/<C-R>"<CR>
 
 "----------------------------------------------------------------------
-" Settings: vim-go 
+" Settings: vim-go
 "----------------------------------------------------------------------
 
 let g:go_highlight_functions = 1
@@ -267,3 +271,11 @@ onoremap <silent> k gk
 " Settings: jsx
 "----------------------------------------------------------------------
 let g:jsx_ext_required = 0
+
+"----------------------------------------------------------------------
+" Settings: dart
+"----------------------------------------------------------------------
+
+let dart_html_in_string=v:true
+let dart_style_guide = 2
+let dart_format_on_save = 1

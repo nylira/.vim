@@ -6,34 +6,29 @@ set nocompatible
 call plug#begin('~/.local/share/nvim/plugged')
 
 " plugins
+Plug 'altercation/vim-colors-solarized'
+Plug 'ap/vim-buftabline'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'danro/rename.vim'
+Plug 'kana/vim-arpeggio'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'Raimondi/delimitMate'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-unimpaired'
-Plug 'danro/rename.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'kana/vim-arpeggio'
-Plug 'ap/vim-buftabline'
-Plug 'altercation/vim-colors-solarized'
-Plug 'ntpeters/vim-better-whitespace'
 
 " language support
 Plug 'cespare/vim-toml'
-Plug 'dart-lang/dart-vim-plugin'
 Plug 'digitaltoad/vim-pug'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'gkz/vim-ls'
-Plug 'neovimhaskell/haskell-vim'
 Plug 'othree/html5.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'posva/vim-vue'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'rust-lang/rust.vim'
 Plug 'sekel/vim-vue-syntastic'
-Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
 Plug 'wavded/vim-stylus'
 
 " javascript
@@ -56,11 +51,12 @@ colorscheme solarized
 " Settings: General
 "----------------------------------------------------------------------
 
+let mapleader = ","
 set exrc
 set hidden                      " switch buffers w/o saving
 set fileencodings=utf-8
 set scrolloff=999
-set history=1001                " remember more 
+set history=1001                " remember more
 set undolevels=1000             " undo all the things
 set visualbell                  " don't beep
 set noerrorbells                " don't beep
@@ -71,6 +67,7 @@ let &showbreak=repeat(' ', 2)   " make long lines slightly indented
 set clipboard=unnamed
 
 set autoread                    " automatically reload files
+
 
 "----------------------------------------------------------------------
 " Settings: Spaces & Tabs
@@ -200,9 +197,6 @@ let g:vim_markdown_no_default_key_mappings = 1
 " Settings: Syntastic
 "----------------------------------------------------------------------
 
-"let g:syntastic_javascript_checkers = ['standard']
-"let g:syntastic_json_checkers=['jsonlint']
-"let g:syntastic_vue_checkers = ['standard', 'eslint']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_html_checkers=['']
 let g:syntastic_html_tidy_ignore_errors = [
@@ -273,9 +267,35 @@ onoremap <silent> k gk
 let g:jsx_ext_required = 0
 
 "----------------------------------------------------------------------
-" Settings: dart
+" Settings: quickfix
 "----------------------------------------------------------------------
 
-let dart_html_in_string=v:true
-let dart_style_guide = 2
-let dart_format_on_save = 1
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
+nmap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>

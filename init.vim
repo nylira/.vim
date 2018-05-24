@@ -16,7 +16,7 @@ Plug 'kana/vim-arpeggio'
 Plug 'ap/vim-buftabline'
 Plug 'altercation/vim-colors-solarized'
 Plug 'neomake/neomake'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " language support
 Plug 'elzr/vim-json'
@@ -253,4 +253,4 @@ let g:jsx_ext_required = 0
 "----------------------------------------------------------------------
 " Settings: deoplete
 "----------------------------------------------------------------------
-let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_at_startup = 1

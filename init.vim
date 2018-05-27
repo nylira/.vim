@@ -1,36 +1,38 @@
 "----------------------------------------------------------------------
-" Bundle Management: Vundle
+" Bundle Management
 "----------------------------------------------------------------------
 
 set nocompatible
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
-" plugins 
+" plugins
+Plug 'altercation/vim-colors-solarized'
+Plug 'ap/vim-buftabline'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'danro/rename.vim'
+Plug 'kana/vim-arpeggio'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'Raimondi/delimitMate'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-unimpaired'
-Plug 'danro/rename.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'kana/vim-arpeggio'
-Plug 'ap/vim-buftabline'
-Plug 'altercation/vim-colors-solarized'
-Plug 'neomake/neomake'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " language support
+Plug 'cespare/vim-toml'
+Plug 'digitaltoad/vim-pug'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'gkz/vim-ls'
 Plug 'othree/html5.vim'
 Plug 'plasticboy/vim-markdown'
-Plug 'wavded/vim-stylus'
 Plug 'posva/vim-vue'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'sekel/vim-vue-syntastic'
+Plug 'wavded/vim-stylus'
 
 " javascript
-Plug 'othree/yajs.vim'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'gavocanov/vim-js-indent'
+Plug 'jelera/vim-javascript-syntax'
 Plug 'mxw/vim-jsx'
 
 " Add plugins to &runtimepath
@@ -49,12 +51,12 @@ colorscheme solarized
 " Settings: General
 "----------------------------------------------------------------------
 
+let mapleader = ","
 set exrc
 set hidden                      " switch buffers w/o saving
 set fileencodings=utf-8
 set scrolloff=999
-set cursorline
-set history=1001                " remember more 
+set history=1001                " remember more
 set undolevels=1000             " undo all the things
 set visualbell                  " don't beep
 set noerrorbells                " don't beep
@@ -65,6 +67,7 @@ let &showbreak=repeat(' ', 2)   " make long lines slightly indented
 set clipboard=unnamed
 
 set autoread                    " automatically reload files
+
 
 "----------------------------------------------------------------------
 " Settings: Spaces & Tabs
@@ -137,16 +140,6 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
 "----------------------------------------------------------------------
-" Settings: neomake
-"----------------------------------------------------------------------
-
-let g:neomake_open_list=2
-let g:neomake_jsx_enabled_makers = ['standard']
-let g:neomake_javascript_enabled_makers = ['standard']
-
-autocmd! BufWritePost * Neomake
-
-"----------------------------------------------------------------------
 " Settings: delimitMate
 "----------------------------------------------------------------------
 
@@ -161,7 +154,7 @@ let delimitMate_balance_matchpairs = 1
 " Settings: NERDTree
 "----------------------------------------------------------------------
 
-nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 " open the old buffer instead a new one
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif   
@@ -170,7 +163,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 " Settings: CtrlP (ctrlp)
 "----------------------------------------------------------------------
 
-let g:ctrlp_map = '<F1>'
+let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 let g:ctrlp_match_window = 'bottom,order:ttb'
@@ -178,15 +171,9 @@ let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|node_modules)$'
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
 endif
 
@@ -207,13 +194,42 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_no_default_key_mappings = 1
 
 "----------------------------------------------------------------------
+" Settings: Syntastic
+"----------------------------------------------------------------------
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_html_checkers=['']
+let g:syntastic_html_tidy_ignore_errors = [
+    \ 'proprietary attribute "v-'
+    \ , 'trimming empty'
+    \ , '<base> escaping malformed URI reference'
+    \ , '<link> escaping malformed URI reference'
+    \ , 'proprietary attribute "required'
+    \ , 'proprietary attribute "novalidate'
+    \ , 'proprietary attribute "analytics'
+    \ , 'proprietary attribute "placeholder'
+    \ , 'proprietary attribute "hidden'
+    \ , 'missing <li>'
+    \ ]
+
+" validate json files
+au BufRead,BufNewFile *.json set filetype=json
+
+"----------------------------------------------------------------------
+" Settings: prettier
+"----------------------------------------------------------------------
+
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+"----------------------------------------------------------------------
 " Settings: search visually
 "----------------------------------------------------------------------
 
 vnoremap // y/<C-R>"<CR>
 
 "----------------------------------------------------------------------
-" Settings: vim-go 
+" Settings: vim-go
 "----------------------------------------------------------------------
 
 let g:go_highlight_functions = 1
@@ -230,7 +246,7 @@ let g:go_highlight_build_constraints = 1
 call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 
 "----------------------------------------------------------------------
-" Settings: nerdtree
+" Settings: nerdtree, ctrl p
 "----------------------------------------------------------------------
 
 map <C-n> :NERDTreeToggle<CR>
@@ -251,6 +267,35 @@ onoremap <silent> k gk
 let g:jsx_ext_required = 0
 
 "----------------------------------------------------------------------
-" Settings: deoplete
+" Settings: quickfix
 "----------------------------------------------------------------------
-"let g:deoplete#enable_at_startup = 1
+
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
+nmap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>

@@ -15,8 +15,8 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'Raimondi/delimitMate'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-unimpaired'
+Plug 'w0rp/ale'
 
 " language support
 Plug 'cespare/vim-toml'
@@ -27,8 +27,6 @@ Plug 'gkz/vim-ls'
 Plug 'othree/html5.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'posva/vim-vue'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'sekel/vim-vue-syntastic'
 Plug 'wavded/vim-stylus'
 
 " javascript
@@ -194,35 +192,6 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_no_default_key_mappings = 1
 
 "----------------------------------------------------------------------
-" Settings: Syntastic
-"----------------------------------------------------------------------
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_html_checkers=['']
-let g:syntastic_html_tidy_ignore_errors = [
-    \ 'proprietary attribute "v-'
-    \ , 'trimming empty'
-    \ , '<base> escaping malformed URI reference'
-    \ , '<link> escaping malformed URI reference'
-    \ , 'proprietary attribute "required'
-    \ , 'proprietary attribute "novalidate'
-    \ , 'proprietary attribute "analytics'
-    \ , 'proprietary attribute "placeholder'
-    \ , 'proprietary attribute "hidden'
-    \ , 'missing <li>'
-    \ ]
-
-" validate json files
-au BufRead,BufNewFile *.json set filetype=json
-
-"----------------------------------------------------------------------
-" Settings: prettier
-"----------------------------------------------------------------------
-
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
-
-"----------------------------------------------------------------------
 " Settings: search visually
 "----------------------------------------------------------------------
 
@@ -299,3 +268,12 @@ endfunction
 
 nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
 nmap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
+
+"----------------------------------------------------------------------
+" Settings: ALE
+"----------------------------------------------------------------------
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\  'javascript': ['prettier'],
+\  'vue': ['prettier']
+\}

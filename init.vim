@@ -28,6 +28,7 @@ Plug 'othree/html5.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'posva/vim-vue'
 Plug 'wavded/vim-stylus'
+Plug 'tikhomirov/vim-glsl'
 
 " javascript
 Plug 'jelera/vim-javascript-syntax'

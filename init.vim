@@ -32,7 +32,6 @@ Plug 'tikhomirov/vim-glsl'
 
 " javascript
 Plug 'jelera/vim-javascript-syntax'
-Plug 'mxw/vim-jsx'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -273,8 +272,13 @@ nmap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
 "----------------------------------------------------------------------
 " Settings: ALE
 "----------------------------------------------------------------------
+
+let g:ale_linters = { 'javascript': ['eslint-prettier']  }
+
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['markdown'] = ['prettier']
+let g:ale_fixers['vue'] = ['prettier']
+let g:ale_fixers['css'] = ['prettier']
 let g:ale_fix_on_save = 1
-let g:ale_fixers = {
-\  'javascript': ['prettier'],
-\  'vue': ['prettier']
-\}
+let g:ale_javascript_prettier_use_local_config = 1

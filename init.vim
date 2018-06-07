@@ -66,6 +66,7 @@ set clipboard=unnamed
 
 set autoread                    " automatically reload files
 
+command! -nargs=0 Sw w !sudo tee % > /dev/null
 
 "----------------------------------------------------------------------
 " Settings: Spaces & Tabs
@@ -277,7 +278,7 @@ let g:ale_linters = { 'javascript': ['eslint-prettier']  }
 
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['markdown'] = ['prettier']
+let g:ale_fixers['md'] = ['prettier']
 let g:ale_fixers['vue'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fix_on_save = 1

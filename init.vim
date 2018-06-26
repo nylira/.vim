@@ -283,3 +283,4 @@ let g:ale_fixers['vue'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_use_deprecated_neovim = 1

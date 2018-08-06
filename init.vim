@@ -154,6 +154,7 @@ let delimitMate_balance_matchpairs = 1
 "----------------------------------------------------------------------
 
 nnoremap <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 " open the old buffer instead a new one
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif   

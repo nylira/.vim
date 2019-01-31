@@ -24,6 +24,7 @@ Plug 'digitaltoad/vim-pug'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'gkz/vim-ls'
+Plug 'jparise/vim-graphql'
 Plug 'othree/html5.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'posva/vim-vue'
@@ -221,6 +222,7 @@ call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 "----------------------------------------------------------------------
 
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$', '\.DS_Store$']
 
 "----------------------------------------------------------------------
 " Settings: buftabline
@@ -231,11 +233,6 @@ let g:buftabline_numbers = 1
 " use movement keys over long lines easier
 onoremap <silent> j gj
 onoremap <silent> k gk
-
-"----------------------------------------------------------------------
-" Settings: jsx
-"----------------------------------------------------------------------
-let g:jsx_ext_required = 0
 
 "----------------------------------------------------------------------
 " Settings: quickfix

@@ -44,6 +44,7 @@ call plug#end()
 set t_Co=256
 syntax enable
 set background=dark
+let g:solarized_termtrans = 1 " This gets rid of the grey backgroun
 colorscheme solarized
 
 "----------------------------------------------------------------------

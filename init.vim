@@ -22,7 +22,7 @@ Plug 'w0rp/ale'
 Plug 'cespare/vim-toml'
 Plug 'digitaltoad/vim-pug'
 Plug 'elzr/vim-json'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'gkz/vim-ls'
 Plug 'jparise/vim-graphql'
 Plug 'othree/html5.vim'
@@ -280,5 +280,13 @@ let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['md'] = ['prettier']
 let g:ale_fixers['vue'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
+let g:ale_fixers['html'] = ['prettier']
+let g:ale_fixers['svelte'] = ['prettier']
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
+
+"----------------------------------------------------------------------
+" Settings: synxtax highlighting
+"----------------------------------------------------------------------
+
+au! BufNewFile,BufRead *.svelte set ft=html
